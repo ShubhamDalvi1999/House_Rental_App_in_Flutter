@@ -70,4 +70,10 @@ class DatabaseHelper {
         where: "age > ? and givenrent = ?", whereArgs: [age, rentGiven]);
     return result;
   }
+
+  Future<int?> deletedata(int id) async {
+    Database? db = await instance.database;
+    var res = await db?.delete(table, where: "id = ?", whereArgs: [id]);
+    return res;
+  }
 }

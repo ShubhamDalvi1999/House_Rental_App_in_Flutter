@@ -1,5 +1,6 @@
 import 'package:database_curd_demo_app/dbhelper.dart';
 import 'package:database_curd_demo_app/pages/customquery.dart';
+import 'package:database_curd_demo_app/pages/delete.dart';
 import 'package:database_curd_demo_app/pages/insert.dart';
 import 'package:database_curd_demo_app/pages/viewall.dart';
 import 'package:flutter/material.dart';
@@ -114,7 +115,10 @@ class _HomePageState extends State<HomePage> {
               child: const Text("Update"),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DeleteData()));
+              },
               style: ElevatedButton.styleFrom(
                 onPrimary: Colors.white,
                 primary: Colors.purple,
