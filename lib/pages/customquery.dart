@@ -50,7 +50,7 @@ class _CustomQueryState extends State<CustomQuery> {
               decoration: const InputDecoration(
                 hintText:
                     'Enter 0 if u want to see customers who have given rent else enter 1',
-                labelText: 'Monthly rent',
+                labelText: 'Monthly rent given or not (0/1)',
                 prefixIcon: Icon(Icons.monetization_on_outlined),
                 border: OutlineInputBorder(),
               ),

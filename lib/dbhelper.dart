@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
@@ -11,6 +12,7 @@ class DatabaseHelper {
   static const columnId = 'id';
   static const columnName = "name";
   static const columnAge = "age";
+  //static Image person_photo = Image.asset('assets/images/person-logo.png');
   static const columnMonthlyRent = "monthlyrent";
   static const columnRentGiven = "givenrent";
 

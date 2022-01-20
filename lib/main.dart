@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(10)),
                 elevation: 20,
               ),
-              child: const Text("Insert"),
+              child: const Text("Insert Ur renatal data"),
             ),
             ElevatedButton(
               onPressed: () {
@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(10)),
                 elevation: 20,
               ),
-              child: const Text("Query"),
+              child: const Text("See all Rental data (Query all)"),
             ),
             ElevatedButton(
               onPressed: () {
@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(10)),
                 elevation: 20,
               ),
-              child: const Text("Query Specific"),
+              child: const Text("Filter data (Query Specific)"),
             ),
             ElevatedButton(
               onPressed: () {},
@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(10)),
                 elevation: 20,
               ),
-              child: const Text("Update"),
+              child: const Text("Update data (to be build)"),
             ),
             ElevatedButton(
               onPressed: () {
@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(10)),
                 elevation: 20,
               ),
-              child: const Text("Delete"),
+              child: const Text("Delete based on id"),
             ),
           ],
         ),
