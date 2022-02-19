@@ -5,7 +5,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'SignUpandLoginpages/SIgnIn.dart';
+
 Future<void> main() async {
+  //initialize firebase app
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
@@ -17,6 +20,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    //MultiProvider that merges multiple providers into a single linear widget tree
+
     return MultiProvider(
       providers: [
         Provider<AuthenticationService>(
@@ -42,9 +47,10 @@ class AutenticationWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
+    // ignore: unnecessary_null_comparison
     if (firebaseUser != null) {
       return HomePage();
     }
-    return Text("Not Signed In ");
+    return SingInPage();
   }
 }
