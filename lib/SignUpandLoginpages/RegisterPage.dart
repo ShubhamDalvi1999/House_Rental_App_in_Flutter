@@ -2,19 +2,20 @@ import 'package:database_curd_demo_app/FIrebaseAuth/authentication_service.dart'
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SingInPage extends StatefulWidget {
-  SingInPage({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  final Function toggleScreen;
+
+  const RegisterPage({Key? key, required this.toggleScreen}) : super(key: key);
 
   @override
-  State<SingInPage> createState() => _SingInPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _SingInPageState extends State<SingInPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  String name = "";
   bool changeButton = false;
 
   @override
@@ -59,12 +60,12 @@ class _SingInPageState extends State<SingInPage> {
                   children: [
                     Container(
                       padding: const EdgeInsets.fromLTRB(40.0, 0.0, 0.0, 0.0),
-                      child: Expanded(
+                      child: const Expanded(
                         child: Text(
-                          "There $name",
+                          "There Welcome",
                           overflow: TextOverflow.clip,
                           maxLines: 1,
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 25.0,
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
@@ -88,6 +89,7 @@ class _SingInPageState extends State<SingInPage> {
                 const SizedBox(
                   height: 5.0,
                 ),
+                const Text("Create account to continue"),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(40.0, 16.0, 40.0, 0.0),
                   child: Column(
@@ -100,10 +102,6 @@ class _SingInPageState extends State<SingInPage> {
                             return "Username cannot be empty";
                           }
                           return null;
-                        },
-                        onChanged: (value) {
-                          name = value;
-                          setState(() {});
                         },
                         style: const TextStyle(
                           fontSize: 22,
@@ -200,31 +198,30 @@ class _SingInPageState extends State<SingInPage> {
                 //login buttton
                 ElevatedButton(
                     onPressed: () {
-                      context.read<AuthenticationService>().signIn(
+                      context.read<AuthenticationService>().signUp(
                             email: emailController.text.trim(),
                             password: passwordController.text.trim(),
                           );
                     },
-                    child: const Text("Sign In")),
+                    child: const Text("REGISTER")),
 
                 //Registeration  (page change)
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(40.0, 16.0, 40.0, 0.0),
-                  child: Row(
-                    children: [
-                      const Text(
-                        "Don't have an account ?",
-                        style: TextStyle(color: Colors.red),
-                      ),
-                      const SizedBox(width: 10),
-                      TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            "Register",
-                            style: TextStyle(color: Colors.blue),
-                          )),
-                    ],
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Already have an account ?",
+                    ),
+                    const SizedBox(width: 5),
+                    TextButton(
+                        onPressed: () {
+                          widget.toggleScreen();
+                        },
+                        child: const Text(
+                          "Login",
+                          style: TextStyle(color: Colors.blue),
+                        )),
+                  ],
                 )
               ],
             ),
