@@ -37,50 +37,59 @@ class _ViewAllRentalsState extends State<ViewAllRentals> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        //mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  viewall();
-                });
-              },
-              child: const Text(" View all the data")),
-          ListView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: listmap.length,
-              itemBuilder: (context, index) {
-                //logic to dynamically generate the status of rent given
-                if (listmap[index].values.elementAt(4) == 1) {
-                  check = 'Yes';
-                } else {
-                  check = 'No';
-                }
+    final _mediaQuery = MediaQuery.of(context).size;
+    return Column(
+      //mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ElevatedButton(
+            onPressed: () {
+              setState(() {
+                viewall();
+              });
+            },
+            child: const Text(" View all the data")),
+        Container(
+          width: _mediaQuery.width * 0.89,
+          height: _mediaQuery.height * 0.6,
+          child: Expanded(
+            //scrolling works with only expanded ,not with singlescrollview or container inside ssview
+            child: Scrollbar(
+              isAlwaysShown: true,
+              showTrackOnHover: true,
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: listmap.length,
+                  itemBuilder: (context, index) {
+                    //logic to dynamically generate the status of rent given
+                    if (listmap[index].values.elementAt(4) == 1) {
+                      check = 'Yes';
+                    } else {
+                      check = 'No';
+                    }
 
-                return ListTile(
-                  leading: const Icon(Icons.person),
-                  title: Text(listmap[index].values.elementAt(1).toString()),
-                  subtitle: Text(
-                      '''Monthly Rent: ${listmap[index].values.elementAt(3).toString()}   Rent Given  :  $check '''),
-                );
-              }),
-          Expanded(
-              child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Text(
-              "Total Remaining Rent: $total_remaining_rent INR",
-              style: const TextStyle(
-                fontSize: 23,
-                fontWeight: FontWeight.bold,
-              ),
+                    return ListTile(
+                      leading: const Icon(Icons.person),
+                      title:
+                          Text(listmap[index].values.elementAt(1).toString()),
+                      subtitle: Text(
+                          '''Monthly Rent: ${listmap[index].values.elementAt(3).toString()}   Rent Given  :  $check '''),
+                    );
+                  }),
             ),
-          ))
-        ],
-      ),
+          ),
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Text(
+            "Total Remaining Rent: $total_remaining_rent INR",
+            style: const TextStyle(
+              fontSize: 23,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        )
+      ],
     );
   }
 }

@@ -64,10 +64,10 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         toolbarHeight: 75,
         centerTitle: true,
-        // leading: CircleAvatar(
-        //   child: Image.asset("assets/images/eevee.png"),
-        //   radius: 25,
-        // ),
+        leading: CircleAvatar(
+          child: Image.asset("assets/images/eevee.png"),
+          radius: 25,
+        ),
         title: const Text(
           'Admin Dashboard',
           style: TextStyle(fontSize: 24),
@@ -83,31 +83,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      drawer: Drawer(
-        child: ListView(children: [
-          UserAccountsDrawerHeader(
-              currentAccountPicture:
-                  Image.asset("assets/images/person-logo.png"),
-              accountName: const Text("Admin"),
-              accountEmail: const Text("email")),
-          const ListTile(
-            leading: Icon(Icons.people),
-            title: Text("All customers"),
-          ),
-          const ListTile(
-            leading: Icon(Icons.people),
-            title: Text("Search customers"),
-          ),
-          const ListTile(
-            leading: Icon(Icons.people),
-            title: Text("Update customers"),
-          ),
-          const ListTile(
-            leading: Icon(Icons.people),
-            title: Text("Delete customers"),
-          ),
-        ]),
-      ),
+
       body: PageView(
         controller: _pageController,
         onPageChanged: (newIndex) {
@@ -218,6 +194,7 @@ class _HomePageState extends State<HomePage> {
         key: navigationKey,
         backgroundColor: Colors.transparent,
         animationDuration: const Duration(milliseconds: 200),
+        color: Colors.white,
         items: _items,
         index: _currentIndex,
         onTap: (newIndex) {

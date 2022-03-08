@@ -1,5 +1,7 @@
+import 'package:database_curd_demo_app/models/index.dart';
 import 'package:flutter/material.dart';
 
+import '../FireStoreDatabase/UserData.dart';
 import '../dbhelper.dart';
 
 class Insertdata extends StatefulWidget {
@@ -13,6 +15,8 @@ class _InsertdataState extends State<Insertdata> {
   final personName = TextEditingController();
   final age = TextEditingController();
   final monthlyrent = TextEditingController();
+  final contactno = TextEditingController();
+  final trust = TextEditingController();
   int rentgiven = 100;
   int rentradiogroup = 10;
 
@@ -20,6 +24,17 @@ class _InsertdataState extends State<Insertdata> {
 
   //insterting input from user as a row in database
   void insertdata() async {
+    //firebase data
+    FirebaseUserdata user = FirebaseUserdata(
+        name: personName.text,
+        age: age.text,
+        rentgiven: rentgiven.toString(),
+        monthlyrent: monthlyrent.text == 1 ? true : false,
+        contactnumber: int.parse(contactno.text),
+        rating: int.parse(trust.text));
+    user.addUser(personName.text, age.text, monthlyrent.text, rentgiven,
+        contactno.text, trust.text);
+    //local data
     Map<String, dynamic> row = {
       DatabaseHelper.columnName: personName.text,
       DatabaseHelper.columnAge: age.text,
@@ -77,6 +92,30 @@ class _InsertdataState extends State<Insertdata> {
           const SizedBox(
             height: 20,
           ),
+          TextField(
+            controller: contactno,
+            decoration: const InputDecoration(
+              hintText: 'enter Contact Number',
+              labelText: 'Contact Number',
+              prefixIcon: Icon(Icons.monetization_on_outlined),
+              border: OutlineInputBorder(),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          TextField(
+            controller: trust,
+            decoration: const InputDecoration(
+              hintText: 'What is the trust rating?',
+              labelText: 'Trust Rating',
+              prefixIcon: Icon(Icons.monetization_on_outlined),
+              border: OutlineInputBorder(),
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -86,9 +125,10 @@ class _InsertdataState extends State<Insertdata> {
                       value: 1,
                       groupValue: rentradiogroup,
                       onChanged: (val) {
-                        rentradiogroup = 1;
-                        rentgiven = 1;
-                        setState(() {});
+                        setState(() {
+                          rentradiogroup = 1;
+                          rentgiven = 1;
+                        });
                       }),
                   const Text("True"),
                 ],
@@ -99,9 +139,10 @@ class _InsertdataState extends State<Insertdata> {
                       value: 0,
                       groupValue: rentradiogroup,
                       onChanged: (val) {
-                        rentradiogroup = 0;
-                        rentgiven = 0;
-                        setState(() {});
+                        setState(() {
+                          rentradiogroup = 0;
+                          rentgiven = 0;
+                        });
                       }),
                   const Text("False"),
                 ],
