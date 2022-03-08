@@ -34,10 +34,10 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         toolbarHeight: 75,
         centerTitle: true,
-        leading: CircleAvatar(
-          child: Image.asset("assets/images/eevee.png"),
-          radius: 25,
-        ),
+        // leading: CircleAvatar(
+        //   child: Image.asset("assets/images/eevee.png"),
+        //   radius: 25,
+        // ),
         title: const Text(
           'Admin Dashboard',
           style: TextStyle(fontSize: 24),
@@ -53,89 +53,112 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Insertdata()));
-              },
-              style: ElevatedButton.styleFrom(
-                onPrimary: Colors.white,
-                primary: Colors.purple,
-                onSurface: Colors.grey,
-                side: const BorderSide(color: Colors.black, width: 1),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                elevation: 20,
-              ),
-              child: const Text("Add a customer"),
+      drawer: Drawer(
+        child: ListView(children: [
+          UserAccountsDrawerHeader(
+              currentAccountPicture:
+                  Image.asset("assets/images/person-logo.png"),
+              accountName: const Text("Admin"),
+              accountEmail: const Text("email")),
+          const ListTile(
+            leading: Icon(Icons.people),
+            title: Text("All customers"),
+          ),
+          const ListTile(
+            leading: Icon(Icons.people),
+            title: Text("Search customers"),
+          ),
+          const ListTile(
+            leading: Icon(Icons.people),
+            title: Text("Update customers"),
+          ),
+          const ListTile(
+            leading: Icon(Icons.people),
+            title: Text("Delete customers"),
+          ),
+        ]),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Insertdata()));
+            },
+            style: ElevatedButton.styleFrom(
+              onPrimary: Colors.white,
+              primary: Colors.purple,
+              onSurface: Colors.grey,
+              side: const BorderSide(color: Colors.black, width: 1),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              elevation: 20,
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ViewAllRentals()));
-              },
-              style: ElevatedButton.styleFrom(
-                onPrimary: Colors.white,
-                primary: Colors.purple,
-                onSurface: Colors.grey,
-                side: const BorderSide(color: Colors.black, width: 1),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                elevation: 20,
-              ),
-              child: const Text("All rental data"),
+            child: const Text("Add a customer"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ViewAllRentals()));
+            },
+            style: ElevatedButton.styleFrom(
+              onPrimary: Colors.white,
+              primary: Colors.purple,
+              onSurface: Colors.grey,
+              side: const BorderSide(color: Colors.black, width: 1),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              elevation: 20,
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CustomQuery()));
-              },
-              style: ElevatedButton.styleFrom(
-                onPrimary: Colors.white,
-                primary: Colors.purple,
-                onSurface: Colors.grey,
-                side: const BorderSide(color: Colors.black, width: 1),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                elevation: 20,
-              ),
-              child: const Text("Search customer"),
+            child: const Text("All rental data"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CustomQuery()));
+            },
+            style: ElevatedButton.styleFrom(
+              onPrimary: Colors.white,
+              primary: Colors.purple,
+              onSurface: Colors.grey,
+              side: const BorderSide(color: Colors.black, width: 1),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              elevation: 20,
             ),
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                onPrimary: Colors.white,
-                primary: Colors.purple,
-                onSurface: Colors.grey,
-                side: const BorderSide(color: Colors.black, width: 1),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                elevation: 20,
-              ),
-              child: const Text("Update customer data"),
+            child: const Text("Search customer"),
+          ),
+          ElevatedButton(
+            onPressed: () {},
+            style: ElevatedButton.styleFrom(
+              onPrimary: Colors.white,
+              primary: Colors.purple,
+              onSurface: Colors.grey,
+              side: const BorderSide(color: Colors.black, width: 1),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              elevation: 20,
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => DeleteData()));
-              },
-              style: ElevatedButton.styleFrom(
-                onPrimary: Colors.white,
-                primary: Colors.purple,
-                onSurface: Colors.grey,
-                side: const BorderSide(color: Colors.black, width: 1),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                elevation: 20,
-              ),
-              child: const Text("Delete based on id"),
+            child: const Text("Update customer data"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DeleteData()));
+            },
+            style: ElevatedButton.styleFrom(
+              onPrimary: Colors.white,
+              primary: Colors.purple,
+              onSurface: Colors.grey,
+              side: const BorderSide(color: Colors.black, width: 1),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              elevation: 20,
             ),
-          ],
-        ),
+            child: const Text("Delete based on id"),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
