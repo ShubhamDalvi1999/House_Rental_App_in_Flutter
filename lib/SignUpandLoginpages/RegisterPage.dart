@@ -15,8 +15,18 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  final _formKey =
+      GlobalKey<FormState>(); //formkey to validate the form submitted
   bool changeButton = false;
+  final GlobalKey<ScaffoldState> _scaffoldstate =
+      GlobalKey<ScaffoldState>(); //Scaffoldstate to showw snackbar
+
+  void _showSnackBar() async {
+    _scaffoldstate.currentState?.showSnackBar(
+        const SnackBar(content: Text("Registered Successfully")));
+    await Future.delayed(
+        const Duration(seconds: 50)); //created a custom wait to show snackbar
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +37,7 @@ class _RegisterPageState extends State<RegisterPage> {
         color: Colors.white,
         child: SingleChildScrollView(
           child: Form(
-            key: _formKey,
+            key: _formKey, //formkey for validating data
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -98,6 +108,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       TextFormField(
                         controller: usernameController,
                         validator: (value) {
+                          //USERNAME VALIDATION
                           if (value!.isEmpty) {
                             return "Username cannot be empty";
                           }
@@ -129,6 +140,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       TextFormField(
                         controller: emailController,
                         validator: (value) {
+                          //EMAIL FIELD VALIDATION
                           if (value!.isEmpty) {
                             return "Email cannot be empty";
                           } else if (value.length < 6) {
@@ -163,6 +175,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       TextFormField(
                         controller: passwordController,
                         validator: (value) {
+                          //PASSWORD VALIDATION
                           if (value!.isEmpty) {
                             return "Password cannot be empty";
                           } else if (value.length < 6) {
@@ -198,10 +211,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 //login buttton
                 ElevatedButton(
                     onPressed: () {
-                      context.read<AuthenticationService>().signUp(
-                            email: emailController.text.trim(),
-                            password: passwordController.text.trim(),
-                          );
+                      if (_formKey.currentState!.validate()) {
+                        _showSnackBar();
+                        context.read<AuthenticationService>().signUp(
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim(),
+                            );
+                      }
                     },
                     child: const Text("REGISTER")),
 

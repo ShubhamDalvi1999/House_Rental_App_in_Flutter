@@ -51,6 +51,6 @@ class AutenticationWrapper extends StatelessWidget {
     if (firebaseUser != null) {
       return HomePage();
     }
-    return ToggleScreen();
+    return ToggleScreen(); //Login or Registration Page
   }
 }

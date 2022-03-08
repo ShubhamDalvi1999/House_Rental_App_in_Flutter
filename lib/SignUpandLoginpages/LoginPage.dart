@@ -15,7 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>(); //Formkey to validate entered values
   String name = "";
   bool changeButton = false;
 
@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
         color: Colors.white,
         child: SingleChildScrollView(
           child: Form(
-            key: _formKey,
+            key: _formKey, //form validation
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -98,8 +98,11 @@ class _LoginPageState extends State<LoginPage> {
                       TextFormField(
                         controller: usernameController,
                         validator: (value) {
+                          //USERNAME VALIDATION
                           if (value!.isEmpty) {
                             return "Username cannot be empty";
+                          } else if (value.length < 3) {
+                            return "Username should be greater than 3 char ";
                           }
                           return null;
                         },
@@ -133,6 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                       TextFormField(
                         controller: emailController,
                         validator: (value) {
+                          //EMAIL VALIDATION
                           if (value!.isEmpty) {
                             return "Email cannot be empty";
                           } else if (value.length < 6) {
@@ -167,6 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                       TextFormField(
                         controller: passwordController,
                         validator: (value) {
+                          //PASSWORD VALIDATION
                           if (value!.isEmpty) {
                             return "Password cannot be empty";
                           } else if (value.length < 6) {
@@ -202,10 +207,12 @@ class _LoginPageState extends State<LoginPage> {
                 //login buttton
                 ElevatedButton(
                     onPressed: () {
-                      context.read<AuthenticationService>().signIn(
-                            email: emailController.text.trim(),
-                            password: passwordController.text.trim(),
-                          );
+                      if (_formKey.currentState!.validate()) {
+                        context.read<AuthenticationService>().signIn(
+                              email: emailController.text.trim(),
+                              password: passwordController.text.trim(),
+                            );
+                      }
                     },
                     child: const Text("Login")),
 

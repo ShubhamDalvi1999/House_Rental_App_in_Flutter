@@ -32,15 +32,26 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Cool DATABASE '),
-        leading: ElevatedButton(
-          onPressed: () {
-            context.read<AuthenticationService>().signOut();
-          },
-          child: const Icon(
-            Icons.logout_rounded,
-          ),
+        toolbarHeight: 75,
+        centerTitle: true,
+        leading: CircleAvatar(
+          child: Image.asset("assets/images/eevee.png"),
+          radius: 25,
         ),
+        title: const Text(
+          'Admin Dashboard',
+          style: TextStyle(fontSize: 24),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              context.read<AuthenticationService>().signOut();
+            },
+            child: CircleAvatar(
+              child: Image.asset("assets/images/logout-icon-png-3.jpg"),
+            ),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
@@ -60,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(10)),
                 elevation: 20,
               ),
-              child: const Text("Insert Ur renatal data"),
+              child: const Text("Add a customer"),
             ),
             ElevatedButton(
               onPressed: () {
@@ -76,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(10)),
                 elevation: 20,
               ),
-              child: const Text("See all Rental data (Query all)"),
+              child: const Text("All rental data"),
             ),
             ElevatedButton(
               onPressed: () {
@@ -92,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(10)),
                 elevation: 20,
               ),
-              child: const Text("Filter data (Query Specific)"),
+              child: const Text("Search customer"),
             ),
             ElevatedButton(
               onPressed: () {},
@@ -105,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                     borderRadius: BorderRadius.circular(10)),
                 elevation: 20,
               ),
-              child: const Text("Update data (to be build)"),
+              child: const Text("Update customer data"),
             ),
             ElevatedButton(
               onPressed: () {
@@ -125,6 +136,17 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        child: CircleAvatar(
+          backgroundColor: Colors.transparent,
+          child: Image.asset("assets/images/add-user.png"),
+        ),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Insertdata()));
+        },
       ),
     );
   }
