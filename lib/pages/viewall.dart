@@ -37,53 +37,49 @@ class _ViewAllRentalsState extends State<ViewAllRentals> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("See the Rental Status of this month"),
-        ),
-        body: Column(
-          //mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-                onPressed: () {
-                  setState(() {
-                    viewall();
-                  });
-                },
-                child: const Text(" View all the data")),
-            ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: listmap.length,
-                itemBuilder: (context, index) {
-                  //logic to dynamically generate the status of rent given
-                  if (listmap[index].values.elementAt(4) == 1) {
-                    check = 'Yes';
-                  } else {
-                    check = 'No';
-                  }
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        //mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  viewall();
+                });
+              },
+              child: const Text(" View all the data")),
+          ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: listmap.length,
+              itemBuilder: (context, index) {
+                //logic to dynamically generate the status of rent given
+                if (listmap[index].values.elementAt(4) == 1) {
+                  check = 'Yes';
+                } else {
+                  check = 'No';
+                }
 
-                  return ListTile(
-                    leading: const Icon(Icons.person),
-                    title: Text(listmap[index].values.elementAt(1).toString()),
-                    subtitle: Text(
-                        '''Monthly Rent: ${listmap[index].values.elementAt(3).toString()}   Rent Given  :  $check '''),
-                  );
-                }),
-            Expanded(
-                child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Text(
-                "Total Remaining Rent: $total_remaining_rent INR",
-                style: const TextStyle(
-                  fontSize: 23,
-                  fontWeight: FontWeight.bold,
-                ),
+                return ListTile(
+                  leading: const Icon(Icons.person),
+                  title: Text(listmap[index].values.elementAt(1).toString()),
+                  subtitle: Text(
+                      '''Monthly Rent: ${listmap[index].values.elementAt(3).toString()}   Rent Given  :  $check '''),
+                );
+              }),
+          Expanded(
+              child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Text(
+              "Total Remaining Rent: $total_remaining_rent INR",
+              style: const TextStyle(
+                fontSize: 23,
+                fontWeight: FontWeight.bold,
               ),
-            ))
-          ],
-        ),
+            ),
+          ))
+        ],
       ),
     );
   }

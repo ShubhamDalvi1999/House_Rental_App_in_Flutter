@@ -48,6 +48,9 @@ dependencies:
   json_annotation: ^4.4.0
   flutter_bloc: ^8.0.1
 
+  #bottomnavigationbar
+  curved_navigation_bar: ^1.0.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
