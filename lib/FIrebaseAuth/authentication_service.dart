@@ -13,25 +13,27 @@ class AuthenticationService {
   }
 
   //Sign In functionality
-  Future<String?> signIn({String? email, String? password}) async {
+  Future<String> signIn({String? email, String? password}) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email!, password: password!);
       return "Signed in";
     } on FirebaseAuthException catch (e) {
-      return e.message;
+      //print("THIS IS FIREBASE SIGNIN ERROR" + e.message.toString());
+      return e.message.toString();
     }
   }
 
   //Sign Up functionality
-  Future<String?> signUp({String? email, String? password}) async {
+  Future<String> signUp({String? email, String? password}) async {
     try {
-      print("REgistering User");
+      print("Registering User");
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email!, password: password!);
       return "Signed up";
     } on FirebaseAuthException catch (e) {
-      return e.message;
+      print("THIS IS FIREBASE SIGNUP ERROR" + e.message.toString());
+      return e.message.toString();
     }
   }
 }

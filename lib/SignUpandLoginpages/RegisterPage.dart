@@ -210,13 +210,24 @@ class _RegisterPageState extends State<RegisterPage> {
 
                 //login buttton
                 ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         _showSnackBar();
-                        context.read<AuthenticationService>().signUp(
-                              email: emailController.text.trim(),
-                              password: passwordController.text.trim(),
-                            );
+                        String message =
+                            // ignore: unnecessary_cast
+                            await context.read<AuthenticationService>().signUp(
+                                  email: emailController.text.trim(),
+                                  password: passwordController.text.trim(),
+                                ) as String;
+                        if (message
+                            .startsWith("The email address is already")) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text(
+                                "The email address is already in use by another account."),
+                            duration: Duration(milliseconds: 900),
+                          ));
+                        }
                       }
                     },
                     child: const Text("REGISTER")),

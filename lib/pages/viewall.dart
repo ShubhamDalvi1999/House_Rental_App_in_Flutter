@@ -54,7 +54,9 @@ class _ViewAllRentalsState extends State<ViewAllRentals> {
           child: Expanded(
             //scrolling works with only expanded ,not with singlescrollview or container inside ssview
             child: Scrollbar(
-              isAlwaysShown: true,
+              //isAlwaysShown: true, //gives error
+              //               "The Scrollbar requires a single ScrollPosition in order to be painted.
+              // When Scrollbar.isAlwaysShown is true, the associated Scrollable widgets must have unique ScrollControllers."
               showTrackOnHover: true,
               child: ListView.builder(
                   scrollDirection: Axis.vertical,

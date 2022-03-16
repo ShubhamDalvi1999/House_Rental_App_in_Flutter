@@ -1,4 +1,5 @@
 import 'package:database_curd_demo_app/FIrebaseAuth/authentication_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -121,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                             borderSide: BorderSide(
                                 color: Colors.lightBlue.shade400, width: 1.0),
                             borderRadius:
-                                BorderRadius.all(Radius.circular(20.0)),
+                                const BorderRadius.all(Radius.circular(20.0)),
                           ),
                           border: const OutlineInputBorder(
                             borderRadius:
@@ -206,12 +207,28 @@ class _LoginPageState extends State<LoginPage> {
 
                 //login buttton
                 ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        context.read<AuthenticationService>().signIn(
-                              email: emailController.text.trim(),
-                              password: passwordController.text.trim(),
-                            );
+                        String message =
+                            // ignore: unnecessary_cast
+                            await context.read<AuthenticationService>().signIn(
+                                  email: emailController.text.trim(),
+                                  password: passwordController.text.trim(),
+                                ) as String;
+                        if (message.startsWith("The password is invalid")) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text("The password is invalid"),
+                            duration: Duration(milliseconds: 900),
+                          ));
+                        } else if (message
+                            .startsWith("There is no user record")) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text("No Such User"),
+                            duration: Duration(milliseconds: 900),
+                          ));
+                        }
                       }
                     },
                     child: const Text("Login")),
