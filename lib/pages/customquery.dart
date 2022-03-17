@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../dbhelper.dart';
+import '../models/dbhelper.dart';
 
 class CustomQuery extends StatefulWidget {
   CustomQuery({Key? key}) : super(key: key);
@@ -15,14 +15,15 @@ class _CustomQueryState extends State<CustomQuery> {
   final rentGiven = TextEditingController();
   List<Map<String, dynamic>> listmap = [];
 
-  Future<List<Map<String, dynamic>>?> customquery() async {
-    var allrows = await dbhelper.queryspecific(age.text, rentGiven.text);
-    listmap = allrows!;
-    return allrows;
+  Future<List<Map<String, dynamic>>> customquery() async {
+    listmap = (await dbhelper.queryspecific(age.text, rentGiven.text))!;
+    return listmap;
   }
 
   @override
   Widget build(BuildContext context) {
+    final _mediaQuery = MediaQuery.of(context).size;
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -53,18 +54,28 @@ class _CustomQueryState extends State<CustomQuery> {
           const SizedBox(
             height: 20,
           ),
-          ListView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: true,
-              itemCount: listmap.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  leading: const Icon(Icons.person),
-                  title: Text(listmap[index].values.elementAt(2).toString()),
-                  subtitle: Text(
-                      'Monthly Rent: ${listmap[index].values.elementAt(3).toString()}'),
-                );
-              }),
+          Container(
+            width: _mediaQuery.width * 0.89,
+            height: _mediaQuery.height * 0.4,
+            child: Expanded(
+              child: Scrollbar(
+                showTrackOnHover: true,
+                child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: listmap.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        leading: const Icon(Icons.person),
+                        title:
+                            Text(listmap[index].values.elementAt(2).toString()),
+                        subtitle: Text(
+                            'Monthly Rent: ${listmap[index].values.elementAt(3).toString()}'),
+                      );
+                    }),
+              ),
+            ),
+          ),
           const SizedBox(
             height: 20,
           ),
