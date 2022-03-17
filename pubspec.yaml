@@ -29,6 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
+  datetime_picker_formfield: ^2.0.0
   
   #firebase dependices
   firebase_core: ^1.12.0
