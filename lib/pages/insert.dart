@@ -2,7 +2,7 @@ import 'package:database_curd_demo_app/models/index.dart';
 import 'package:flutter/material.dart';
 
 import '../FireStoreDatabase/UserData.dart';
-import '../dbhelper.dart';
+import '../models/dbhelper.dart';
 
 class Insertdata extends StatefulWidget {
   const Insertdata({Key? key}) : super(key: key);

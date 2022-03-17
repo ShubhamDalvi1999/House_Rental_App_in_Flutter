@@ -7,7 +7,7 @@ import 'package:database_curd_demo_app/pages/viewall.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../dbhelper.dart';
+import '../models/dbhelper.dart';
 
 class HomePage extends StatefulWidget {
   @override
