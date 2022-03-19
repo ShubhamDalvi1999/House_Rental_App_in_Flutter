@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import '../models/dbhelper.dart';
+import '../../models/dbhelper.dart';
 
 class ViewAllRentals extends StatefulWidget {
   ViewAllRentals({Key? key}) : super(key: key);

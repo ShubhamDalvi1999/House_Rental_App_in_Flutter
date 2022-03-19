@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/dbhelper.dart';
+import '../../models/dbhelper.dart';
 
 class CustomQuery extends StatefulWidget {
   CustomQuery({Key? key}) : super(key: key);

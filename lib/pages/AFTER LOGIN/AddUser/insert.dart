@@ -1,9 +1,10 @@
+import 'package:database_curd_demo_app/FireStoreDatabase/MonthlyData.dart';
 import 'package:database_curd_demo_app/models/index.dart';
 import 'package:flutter/material.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:intl/intl.dart';
-import '../FireStoreDatabase/UserData.dart';
-import '../models/dbhelper.dart';
+import '../../../FireStoreDatabase/UserData.dart';
+import '../../../models/dbhelper.dart';
 
 class Insertdata extends StatefulWidget {
   const Insertdata({Key? key}) : super(key: key);
@@ -45,6 +46,13 @@ class _InsertdataState extends State<Insertdata> {
   int rentradiogroup = 10;
   final _formKey = GlobalKey<FormState>();
   final format = DateFormat("yyyy-MM-dd HH:mm");
+  //demo montlydata
+  final MonthlyData _monthlyData = MonthlyData(
+      month: DateTime.now().month,
+      fullrentgivenondate: DateTime.now().day,
+      partialrentgivenondate: DateTime.now().day,
+      rentgivenby: "Shubham",
+      paymentmethod: "CashPayment");
 
   final dbhelper = DatabaseHelper.instance;
 
@@ -52,17 +60,25 @@ class _InsertdataState extends State<Insertdata> {
   void insertdata() async {
     //firebase data
     FirebaseUserdata user = FirebaseUserdata(
-        name: personName.text,
-        age: age.text,
-        rentgiven: rentgiven.toString(),
-        monthlyrent: monthlyrent.text == 1 ? true : false,
-        contactnumber: int.parse(contactno.text),
-        rating: int.parse(trust.text),
-        fullrentgivenondate: null,
-        partialrentgiven: null,
-        partialrentgivenondate: null);
-    // user.addUser(personName.text, age.text, monthlyrent.text, rentgiven,
-    //     contactno.text, trust.text);
+      name: personName.text,
+      age: age.text,
+      rentgiven: rentgiven.toString(),
+      monthlyrent: monthlyrent.text == 1 ? true : false,
+      contactnumber: int.parse(contactno.text),
+      rating: int.parse(trust.text),
+      partialrentgiven: null,
+    );
+    user.addUser(
+      personName.text,
+      age.text,
+      rentgiven.toString(),
+      true,
+      int.parse(contactno.text),
+      int.parse(trust.text),
+      null,
+      _monthlyData,
+    );
+    user.addUsersMontlyData();
     //local data
     Map<String, dynamic> row = {
       DatabaseHelper.columnName: personName.text,

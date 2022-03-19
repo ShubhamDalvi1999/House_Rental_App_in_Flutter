@@ -1,7 +1,6 @@
-import 'package:database_curd_demo_app/SignUpandLoginpages/RegisterPage.dart';
 import 'package:flutter/material.dart';
-
-import '../SignUpandLoginpages/LoginPage.dart';
+import 'SignUpandLoginpages/LoginPage.dart';
+import 'SignUpandLoginpages/RegisterPage.dart';
 
 class ToggleScreen extends StatefulWidget {
   @override

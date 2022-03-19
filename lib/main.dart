@@ -1,11 +1,10 @@
 import 'package:database_curd_demo_app/FIrebaseAuth/authentication_service.dart';
-import 'package:database_curd_demo_app/pages/home.dart';
+import 'package:database_curd_demo_app/pages/AFTER%20LOGIN/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'pages/RegisterAndLogin.dart';
-import 'SignUpandLoginpages/LoginPage.dart';
+import 'pages/BEFORE LOGIN/RegisterAndLogin.dart';
 
 Future<void> main() async {
   //initialize firebase app

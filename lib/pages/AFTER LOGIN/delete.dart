@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
-import '../models/dbhelper.dart';
+import '../../models/dbhelper.dart';
 
 class DeleteData extends StatefulWidget {
   DeleteData({Key? key}) : super(key: key);
