@@ -42,6 +42,7 @@ class _InsertdataState extends State<Insertdata> {
   final fullrentgivenondate = TextEditingController();
   final partialrentgiven = TextEditingController();
   final partialrentgivenondate = TextEditingController();
+  final newentrydate = TextEditingController();
   int rentgiven = 100;
   int rentradiogroup = 10;
   final _formKey = GlobalKey<FormState>();
@@ -57,6 +58,7 @@ class _InsertdataState extends State<Insertdata> {
   final dbhelper = DatabaseHelper.instance;
 
   //insterting input from user as a row in database
+  //TOdo: prevent duplicate data in database
   void insertdata() async {
     //firebase data
     FirebaseUserdata user = FirebaseUserdata(
@@ -166,6 +168,7 @@ class _InsertdataState extends State<Insertdata> {
                 height: 20,
               ),
               DateTimeField(
+                controller: newentrydate,
                 format: format,
                 onShowPicker: (context, currentValue) async {
                   final date = await showDatePicker(
@@ -193,7 +196,7 @@ class _InsertdataState extends State<Insertdata> {
                 children: [
                   Row(
                     children: [
-                      const Text("Full Rent Staus: "),
+                      const Text("Full Rent Received Staus: "),
                       Radio(
                           value: 1,
                           groupValue: rentradiogroup,
@@ -203,7 +206,7 @@ class _InsertdataState extends State<Insertdata> {
                               rentgiven = 1;
                             });
                           }),
-                      const Text("True"),
+                      const Text("Yes"),
                     ],
                   ),
                   Row(
@@ -217,7 +220,7 @@ class _InsertdataState extends State<Insertdata> {
                               rentgiven = 0;
                             });
                           }),
-                      const Text("False"),
+                      const Text("No"),
                     ],
                   )
                 ],

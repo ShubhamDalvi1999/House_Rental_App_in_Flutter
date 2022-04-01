@@ -1,12 +1,12 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:database_curd_demo_app/FIrebaseAuth/authentication_service.dart';
-import 'package:database_curd_demo_app/pages/AFTER%20LOGIN/customquery.dart';
-import 'package:database_curd_demo_app/pages/AFTER%20LOGIN/delete.dart';
-import 'package:database_curd_demo_app/pages/AFTER%20LOGIN/viewall.dart';
+import 'package:database_curd_demo_app/pages/AFTER%20LOGIN/DRAWER%20FUNCT/customquery.dart';
+import 'package:database_curd_demo_app/pages/AFTER%20LOGIN/DRAWER%20FUNCT/delete.dart';
+import 'package:database_curd_demo_app/pages/AFTER%20LOGIN/DRAWER%20FUNCT/viewall.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../models/dbhelper.dart';
-import 'AddUser/insert.dart';
+import 'ADD USER DATA/insert.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -189,6 +189,8 @@ class _HomePageState extends State<HomePage> {
               context, MaterialPageRoute(builder: (context) => Insertdata()));
         },
       ),
+      //Todo: change bottom navigation bar to drawer for admin login dashboard
+
       bottomNavigationBar: CurvedNavigationBar(
         key: navigationKey,
         backgroundColor: Colors.transparent,
