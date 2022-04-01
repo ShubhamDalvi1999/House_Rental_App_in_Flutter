@@ -58,14 +58,10 @@ class FirebaseUserdata {
   //Todo: adding condition for only one entry per month
   void addUsersMontlyData() async {
     //firestore instance to query data , to apply conditions to add data to database
-    /*var dbRef ;
-     await FirebaseFirestore.instance
-        .collection("Userdata")
-        .doc("$name")
-        .collection("monthly $name data")
-        .where("month", isEqualTo: DateTime.now().month)
-        .get()*/
-    var dbRef;
+
+    //todo : add the following lines to the function which will help validate
+    //duplicate entry of month for a particular month
+    //
     await FirebaseFirestore.instance
         .collection("Userdata")
         .doc("$name")
