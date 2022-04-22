@@ -30,6 +30,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  #checking internet connectivity
+  connectivity_plus: ^2.2.1
+
   datetime_picker_formfield: ^2.0.0
   
   #firebase dependices

@@ -10,11 +10,36 @@ Future<void> main() async {
   //initialize firebase app
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
+  //init state method to check internet connectivity and app close/running in background
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addObserver(this);
+  }
+
+  //dispose method to avoid memory leak problems
+  @override
+  void dispose() {
+    WidgetsBinding.instance?.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // TODO: implement didChangeAppLifecycleState
+    super.didChangeAppLifecycleState(state);
+  }
 
   // This widget is the root of your application.
   @override
@@ -40,14 +65,21 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class AutenticationWrapper extends StatelessWidget {
+class AutenticationWrapper extends StatefulWidget {
   const AutenticationWrapper({Key? key}) : super(key: key);
 
   @override
+  State<AutenticationWrapper> createState() => _AutenticationWrapperState();
+}
+
+class _AutenticationWrapperState extends State<AutenticationWrapper> {
+  @override
   Widget build(BuildContext context) {
     final firebaseUser = context.watch<User>();
-    // ignore: unnecessary_null_comparison
+
     if (firebaseUser != null) {
+      //todo :if user is a normal user redirect to different pages
+      //todo : if user is admin redirect to diff pages
       return HomePage();
     }
     return ToggleScreen(); //Login or Registration Page

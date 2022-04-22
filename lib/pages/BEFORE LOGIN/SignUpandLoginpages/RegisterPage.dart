@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:database_curd_demo_app/FIrebaseAuth/authentication_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,39 @@ class _RegisterPageState extends State<RegisterPage> {
         const SnackBar(content: Text("Registered Successfully")));
     await Future.delayed(
         const Duration(seconds: 50)); //created a custom wait to show snackbar
+  }
+
+  //for checking internet connectivity
+  String status = "Waiting for internet connection";
+  final Connectivity _connectivity = Connectivity();
+
+  void checkConnectivity() async {
+    var connectionResult = await _connectivity.checkConnectivity();
+    if (connectionResult == ConnectivityResult.mobile) {
+      status = "MobileData";
+    } else if (connectionResult == ConnectivityResult.wifi) {
+      status = "Wifi";
+    } else {
+      status = "Not connected to internet";
+    }
+    setState(() {});
+    // if (this.mounted) {
+    //   setState(() {
+    //     // Your state change code goes here
+    //     print("setstate called");
+    //   });
+    // }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkConnectivity();
   }
 
   @override
@@ -208,9 +242,17 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 30),
 
-                //login buttton
+                //REgister buttton
                 ElevatedButton(
                     onPressed: () async {
+                      if (status == "Not connected to internet") {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("Not connected to internet"),
+                          duration: Duration(milliseconds: 800),
+                        ));
+                      }
+
                       if (_formKey.currentState!.validate()) {
                         _showSnackBar();
                         String message =

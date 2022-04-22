@@ -23,7 +23,6 @@ class _ToggleScreenState extends State<ToggleScreen> {
         toggleScreen: toggleScreen,
       );
     } else {
-      print("in login page");
       return LoginPage(
         toggleScreen: toggleScreen,
       );

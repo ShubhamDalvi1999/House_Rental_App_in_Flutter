@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:database_curd_demo_app/FIrebaseAuth/authentication_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,33 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>(); //Formkey to validate entered values
   String name = "";
   bool changeButton = false;
+
+  //for checking internet connectivity
+  String status = "Waiting for internet connection";
+  final Connectivity _connectivity = Connectivity();
+
+  void checkConnectivity() async {
+    var connectionResult = await _connectivity.checkConnectivity();
+    if (connectionResult == ConnectivityResult.mobile) {
+      status = "MobileData";
+    } else if (connectionResult == ConnectivityResult.wifi) {
+      status = "Wifi";
+    } else {
+      status = "Not connected to internet";
+    }
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkConnectivity();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -208,6 +236,14 @@ class _LoginPageState extends State<LoginPage> {
                 //login buttton
                 ElevatedButton(
                     onPressed: () async {
+                      if (status == "Not connected to internet") {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("Not connected to internet"),
+                          duration: Duration(milliseconds: 800),
+                        ));
+                      }
+
                       if (_formKey.currentState!.validate()) {
                         String message =
                             // ignore: unnecessary_cast
@@ -233,7 +269,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: const Text("Login")),
 
-                //Registeration  (page change)
+                //Registration  (page change)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -250,7 +286,7 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(color: Colors.blue),
                         )),
                   ],
-                )
+                ),
               ],
             ),
           ),
