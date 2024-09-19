@@ -1,4 +1,4 @@
-# database_curd_demo_app
+# database_curd_app
 
 A new Flutter project.
 
