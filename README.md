@@ -1,6 +1,4 @@
-# database_curd_app
-
-A new Flutter project.
+# House Rent Tracking Project
 
 ## Getting Started
 
